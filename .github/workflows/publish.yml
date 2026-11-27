@@ -16,6 +16,7 @@ jobs:
       - name: Copy digests para este pacote (preserva digest, publica via GITHUB_TOKEN)
         env:
           SRC_PAT: ${{ secrets.GHCR_SRC_PAT }}
+          GITHUB_TOKEN: *** secrets.GITHUB_TOKEN }}
         run: |
           echo "$GITHUB_TOKEN" | skopeo login ghcr.io -u "${{ github.actor }}" --password-stdin
           echo "$SRC_PAT" | skopeo login ghcr.io -u LeonardoDiasRR --password-stdin
