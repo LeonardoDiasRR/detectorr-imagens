@@ -15,12 +15,12 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq skopeo
       - name: Copy digests para este pacote (preserva digest, publica via token do workflow)
         env:
-          SRC_PAT: ${ secrets.GHCR_SRC_PAT }}
-          GITHUB_TOKEN: ${ secrets.GITHUB_TOKEN }}
+          SRC_PAT: ${{ secrets.GHCR_SRC_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "$GITHUB_TOKEN" | skopeo login ghcr.io -u "${ github.actor }}" --password-stdin
+          echo "$GITHUB_TOKEN" | skopeo login ghcr.io -u "${{ github.actor }}" --password-stdin
           echo "$SRC_PAT" | skopeo login ghcr.io -u LeonardoDiasRR --password-stdin
-          for d in ${ inputs.digests }}; do
+          for d in ${{ inputs.digests }}; do
             skopeo copy --src-creds "LeonardoDiasRR:$SRC_PAT" \
               "docker://ghcr.io/leonardodiasrr/imagens-docker@$d" \
               "docker://ghcr.io/leonardodiasrr/detectorr-imagens@$d"
