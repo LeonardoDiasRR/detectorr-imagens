@@ -21,6 +21,6 @@ jobs:
           for d in ${{ inputs.digests }}; do
             skopeo copy --src-creds "LeonardoDiasRR:$SRC_PAT" --dest-creds "${{ github.actor }}:$GITHUB_TOKEN" \
               "docker://ghcr.io/leonardodiasrr/imagens-docker@$d" \
-              "docker://ghcr.io/leonardodiasrr/detectorr-imagens@$d"
+              "docker://ghcr.io/leonardodiasrr/detectorr-img@$d"
             echo "copied $d"
           done
