@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       digests:
-        description: digests sha256: a separar por espaco (pacote de origem imagens-docker)
+        description: digests (pacote de origem imagens-docker)
         required: true
 jobs:
   sync:
