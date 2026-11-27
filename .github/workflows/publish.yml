@@ -15,11 +15,11 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq skopeo
       - name: Copy digests (identidade do workflow no destino)
         env:
-          SRC_PAT: "{{ secrets.GHCR_SRC_PAT }}"
-          GITHUB_TOKEN: "{{ secrets.GITHUB_TOKEN }}"
+          SRC_PAT: "${{ secrets.GHCR_SRC_PAT }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: |
-          for d in {{ inputs.digests }}; do
-            skopeo copy --src-creds "LeonardoDiasRR:$SRC_PAT" --dest-creds "{{ github.actor }}:$GITHUB_TOKEN" \
+          for d in ${{ inputs.digests }}; do
+            skopeo copy --src-creds "LeonardoDiasRR:$SRC_PAT" --dest-creds "${{ github.actor }}:$GITHUB_TOKEN" \
               "docker://ghcr.io/leonardodiasrr/imagens-docker@$d" \
               "docker://ghcr.io/leonardodiasrr/detectorr-imagens@$d"
             echo "copied $d"
